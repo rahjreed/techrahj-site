@@ -51,53 +51,81 @@ const IMG_HUB_INTEGRATED = "https://www.vivint.com/sites/default/files/styles/sm
 const IMG_DOORBELL_DETAIL = "https://www.vivint.com/sites/default/files/styles/small_hq_840/public/image/2026-01/dbc.png.webp?itok=JFC5lbrh";
 const IMG_PRO_INSTALL = "https://www.vivint.com/sites/default/files/styles/desktop_1600_hq/public/image/2024-01/ProInstall-1-Full-1600.jpg.webp?itok=FY9zy1nT";
 
-// --- Product Data ---
+// --- Product Data (FULL RECOVERED LIST) ---
 const PRODUCTS = [
   { 
     name: "Outdoor Camera Pro", 
     desc: "AI-Driven Proactive Defense", 
     img: "https://www.vivint.com/sites/default/files/styles/square_hq_280x280/public/image/2026-02/Image_4.png.webp?itok=PQmCh1nt",
-    longDesc: "The Outdoor Camera Pro proactively prevents crime using advanced AI detection to identify true threats. Its Smart Deter technology triggers a 140dB siren to ward off intruders.",
+    longDesc: "The Outdoor Camera Pro proactively prevents crime using advanced computer vision AI to identify threats. Its Smart Deter technology triggers a 140dB siren and LED ring to ward off intruders before they can strike.",
     features: ["4K HDR Sensor", "AI Person Detection", "140dB Warning Siren", "Two-Way Talk"]
   },
   { 
     name: "Doorbell Camera Pro", 
     desc: "Smart Package Protection", 
     img: "https://www.vivint.com/sites/default/files/styles/square_hq_280x280/public/image/2022-07/Carousel-DBC-Desktop.png.webp?itok=Sbl-kZmg",
-    longDesc: "Protects your front porch with a 180° x 180° field of view. AI Deterrence identifies package thieves and uses light and sound to ward them off.",
-    features: ["180° x 180° Wide View", "Package Detection AI", "Smart Deter Technology", "Night Vision"]
-  },
-  { 
-    name: "Water Sensor", 
-    desc: "Flood Protection", 
-    img: "https://www.vivint.com/sites/default/files/image/2024-07/productViewAll_water_sensor.png",
-    longDesc: "Detects leaks near appliances or basements. Alerts your Smart Hub immediately to prevent costly water damage.",
-    features: ["Instant Detection", "Freeze Alerts", "Encrypted Signal", "10-Year Battery"]
+    longDesc: "Protects your front porch with a 180° x 180° field of view—the widest in the industry. Its AI deterrent identifies package thieves and uses light and sound to ward them off.",
+    features: ["180° x 180° Ultra-Wide View", "Package Detection AI", "Smart Deter Technology", "Night Vision"]
   },
   { 
     name: "Smart Lock", 
     desc: "Keyless Home Security", 
     img: "https://www.vivint.com/sites/default/files/styles/square_hq_280x280/public/image/2023-12/Carousel-lock.png.webp?itok=QqCU9qG3",
-    longDesc: "Control access from anywhere. Create unique codes for family and receive alerts when the door is opened.",
-    features: ["Remote Lock/Unlock", "Unique Access Codes", "Tamper-Proof", "App Integration"]
+    longDesc: "Control access to your home from anywhere. Create unique codes for family and receive instant alerts whenever the door is accessed, ensuring you never have to hide a key again.",
+    features: ["Remote Lock/Unlock", "Unique Guest Access Codes", "Tamper-Proof Design", "Automatic Arming"]
   },
   { 
     name: "Vivint Smart Hub", 
-    desc: "Mission Control", 
+    desc: "Smart Home Command Center", 
     img: "https://www.vivint.com/sites/default/files/styles/square_hq_280x280/public/image/2023-12/Carousel_smartcontrol.png.webp?itok=08uMPQGz",
-    longDesc: "A 7-inch touchscreen brain for your home with a dedicated cellular connection for 24/7 reliability.",
+    longDesc: "The brain of your home. A 7-inch touchscreen that connects all your devices into one ecosystem with a dedicated cellular connection for 24/7 reliability even without Wi-Fi.",
     features: ["7-inch Touchscreen", "Cellular Connection", "One-Touch Dispatch", "Two-Way Voice"]
   },
   { 
+    name: "Indoor Camera Pro", 
+    desc: "Advanced Interior Vision", 
+    img: "https://www.vivint.com/sites/default/files/styles/square_hq_280x280/public/image/2023-07/IDCP-ProductCarousel.png.webp?itok=-XGN22oL",
+    longDesc: "Monitor your home's interior with 1080p HD. Features a unique 'One-Touch Call Out' button that allows family members to contact your mobile app with a single tap.",
+    features: ["One-Touch Call to App", "AI Person Detection", "Privacy Mode Control", "HD Night Vision"]
+  },
+  { 
+    name: "Smart Sensor", 
+    desc: "Invisible Entry Protection", 
+    img: "https://www.vivint.com/sites/default/files/styles/square_hq_280x280/public/image/2023-08/Carousel-SmartSensor-Mobile_0.png.webp?itok=Ri6GP87y",
+    longDesc: "Ultra-slim sensors that blend into your home's architecture while detecting unauthorized entry at doors or windows. Encrypted to prevent signal interference.",
+    features: ["Encrypted Signal", "Slim Profile Design", "5-Year Battery Life", "Tamper-Switch Protection"]
+  },
+  { 
+    name: "Garage Control", 
+    desc: "Remote Access and Alerts", 
+    img: "https://www.vivint.com/sites/default/files/styles/square_hq_280x280/public/image/2023-07/GarageControl-Carousel.png.webp?itok=JdRDe-jH",
+    longDesc: "Never worry about a forgotten garage door. Open or close your door remotely and set your system to automatically close it when you arm the home at night.",
+    features: ["Remote App Control", "Left-Open Alerts", "State Integration", "Secure Connection"]
+  },
+  { 
+    name: "Smart Thermostat", 
+    desc: "Energy Efficient Climate", 
+    img: "https://www.vivint.com/sites/default/files/styles/square_hq_280x280/public/image/2023-07/Thermostat-Carousel.png.webp?itok=WPdRZrNu",
+    longDesc: "Learns your preferences and understands when you're home or away to optimize energy savings. Integrates with safety sensors to shut down HVAC during fire emergencies.",
+    features: ["In-App Temp Control", "Auto Energy Savings", "Safety Shut-off", "Voice Control Ready"]
+  },
+  { 
     name: "Smoke & CO Detector", 
-    desc: "Safety Monitoring", 
+    desc: "24/7 Professional Safety", 
     img: "https://www.vivint.com/sites/default/files/styles/square_hq_280x280/public/image/2026-01/smoke.png.webp?itok=uuDTm9LU",
-    longDesc: "24/7 professional fire monitoring that shuts down HVAC to stop smoke and unlocks doors automatically.",
-    features: ["Professional Monitoring", "HVAC Emergency Stop", "Interconnected Alarms", "CO Sensing"]
+    longDesc: "Professionally monitored safety that does more. In a fire, it alerts the hub, shuts down airflow to prevent smoke spread, and unlocks doors for your escape.",
+    features: ["24/7 Pro Monitoring", "HVAC Emergency Stop", "Interconnected Alarms", "Electrochemical Sensing"]
+  },
+  { 
+    name: "Water Sensor", 
+    desc: "Flood Protection", 
+    img: "https://www.vivint.com/sites/default/files/image/2024-07/productViewAll_water_sensor.png",
+    longDesc: "Detects leaks near appliances or basements immediately. Alerts your Smart Hub and phone, allowing you to act before a minor leak becomes major damage.",
+    features: ["Instant Detection", "Freeze Alerts", "Encrypted Signal", "10-Year Battery"]
   }
 ];
 
-// --- Inquiry Modal Component ---
+// --- Inquiry Modal Component (JOTFORM PAGE EMBED) ---
 const InquiryModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
@@ -110,9 +138,9 @@ const InquiryModal = ({ isOpen, onClose }) => {
         </button>
         
         <div className="p-4 md:p-8 pt-12 md:pt-16">
-           <div className="mb-6 text-[11px] leading-relaxed text-slate-500 bg-blue-50/50 p-4 rounded-xl border border-blue-100 italic">
+           <div className="mb-6 text-[11px] leading-relaxed text-slate-500 bg-blue-50/50 p-4 rounded-xl border border-blue-100 italic font-sans">
                <Info className="w-4 h-4 text-blue-500 mb-2 shrink-0" />
-               <strong>Disclaimer:</strong> This site is owned by a Vivint employee. If you need a service call, tech support, or billing help, contact Vivint Corporate at <a href={`tel:${VIVINT_CORPORATE_SERVICE}`} className="font-bold underline">{VIVINT_CORPORATE_SERVICE}</a>.
+               <strong>Disclaimer:</strong> This site is owned by a Vivint employee. If you need a service call, tech support, or billing help, contact Vivint Corporate at <a href={`tel:${VIVINT_CORPORATE_SERVICE}`} className="font-bold underline text-blue-600">{VIVINT_CORPORATE_SERVICE}</a>.
             </div>
             <iframe 
               id="JotFormIFrame-019c9390367b78dd8b000792e4ee30e01bf4" 
@@ -130,7 +158,7 @@ const InquiryModal = ({ isOpen, onClose }) => {
   );
 };
 
-// --- Product Focus Modal ---
+// --- Product Focus Modal (MOBILE OPTIMIZED) ---
 const ProductFocusModal = ({ product, onClose, openInquiry }) => {
   if (!product) return null;
   return (
@@ -141,10 +169,12 @@ const ProductFocusModal = ({ product, onClose, openInquiry }) => {
           <X className="w-5 h-5 md:w-6 md:h-6" />
         </button>
 
+        {/* Responsive Image Stage */}
         <div className="w-full md:w-1/2 h-[250px] sm:h-[350px] md:h-auto bg-slate-50 flex items-center justify-center p-8 md:p-12 shrink-0">
           <img src={product.img} alt={product.name} className="w-full h-full object-contain drop-shadow-xl" />
         </div>
 
+        {/* Scrollable Content Side */}
         <div className="w-full md:w-1/2 p-6 md:p-16 lg:p-20 overflow-y-auto flex flex-col justify-center bg-white">
           <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 mb-4 md:mb-6">Component Specs</h2>
           <h3 className="text-3xl md:text-5xl font-black uppercase text-slate-900 mb-4 md:mb-8 leading-none tracking-tighter">{product.name}</h3>
@@ -175,6 +205,7 @@ const ScrollReveal = ({ children }) => {
   return <div ref={ref} className={`transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>{children}</div>;
 };
 
+// --- Product Carousel ---
 const ProductCarousel = ({ title, subtitle, onSelectProduct }) => {
   const scrollRef = useRef(null);
   const scroll = (direction) => {
@@ -190,7 +221,7 @@ const ProductCarousel = ({ title, subtitle, onSelectProduct }) => {
       <div className="max-w-7xl mx-auto mb-16 flex flex-col md:flex-row justify-between items-end gap-6">
         <div>
           <h2 className="text-xs font-black uppercase tracking-[0.4em] text-slate-400 mb-4">{title}</h2>
-          <h3 className="text-3xl md:text-5xl font-black uppercase text-slate-900 leading-none tracking-tighter">{subtitle}</h3>
+          <h3 className="text-4xl md:text-5xl font-black uppercase text-slate-900 leading-none tracking-tighter">{subtitle}</h3>
         </div>
         <div className="flex space-x-2">
           <button onClick={() => scroll('left')} className="p-3 rounded-full bg-slate-100 hover:bg-[#FF5900] hover:text-white transition-all"><ChevronLeft className="w-6 h-6" /></button>
@@ -205,7 +236,7 @@ const ProductCarousel = ({ title, subtitle, onSelectProduct }) => {
             </div>
             <div className="text-center">
               <h4 className="text-[10px] font-black uppercase text-[#FF5900] mb-2">{product.name}</h4>
-              <p className="text-slate-500 text-xs font-bold leading-tight uppercase tracking-widest">{product.desc}</p>
+              <p className="text-slate-900 text-xs font-bold leading-tight uppercase tracking-widest">{product.desc}</p>
             </div>
           </div>
         ))}
@@ -231,6 +262,7 @@ const App = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // JotForm Handler
   useEffect(() => {
     const scriptId = 'jotform-handler-script';
     if (!document.getElementById(scriptId)) {
@@ -321,7 +353,7 @@ const App = () => {
   const VegasTripView = () => (
     <>
       <PageHeader title="4-Day Vegas Trip" subtitle="A TechRahj exclusive reward for direct technical booking." icon={Plane} />
-      <section className="py-24 px-6 max-w-7xl mx-auto text-slate-900"><ScrollReveal><div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24"><div className="bg-white rounded-[48px] p-10 md:p-20 border border-slate-200 shadow-sm"><h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-slate-900 mb-8 leading-[0.95]">4 Days. 3 Nights. <br/><span className="text-[#FF5900]">On Us.</span></h2><p className="text-slate-600 text-lg leading-relaxed mb-10 font-light">Book through TechRahj.com and receive a complimentary 4-day, 3-night getaway voucher for two upon successful installation completion.</p><div className="space-y-6">{[{ t: "Premier Destinations", d: "High-end Las Vegas resort locations." }, { t: "12-Month Validity", d: "Vouchers valid for a full calendar year." }].map((item, i) => (<div key={i} className="flex items-start space-x-4"><div className="w-6 h-6 rounded-full bg-[#FF5900]/10 flex items-center justify-center mt-1"><Check className="w-3.5 h-3.5 text-[#FF5900]" /></div><div><p className="font-bold text-slate-900 uppercase text-xs tracking-widest">{item.t}</p><p className="text-slate-500 text-sm mt-1">{item.d}</p></div></div>))}</div></div><div className="relative group"><div className="aspect-square bg-slate-900 rounded-[48px] overflow-hidden flex flex-col items-center justify-center text-white relative"><div className="absolute inset-0 bg-gradient-to-tr from-[#FF5900]/30 to-transparent opacity-60" /><Ticket className="w-32 h-32 text-white mb-8 animate-bounce" /><p className="text-xs font-black uppercase tracking-[0.4em]">Direct Tech Booking Only</p></div><div className="absolute -bottom-6 -right-6 bg-white border-2 border-[#FF5900]/20 p-8 rounded-3xl shadow-2xl text-center"><p className="text-3xl font-black text-slate-900">$600+</p><p className="text-[10px] font-black text-slate-400 uppercase mt-1 leading-none tracking-widest">Retail Value</p></div></div></div></ScrollReveal></section>
+      <section className="py-24 px-6 max-w-7xl mx-auto text-slate-900"><ScrollReveal><div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24"><div className="bg-white rounded-[48px] p-10 md:p-20 border border-slate-200 shadow-sm"><h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-slate-900 mb-8 leading-[0.95]">4 Days. 3 Nights. <br/><span className="text-[#FF5900]">On Us.</span></h2><p className="text-slate-600 text-lg leading-relaxed mb-10 font-light">Book through TechRahj.com and receive a complimentary 4-day, 3-night getaway voucher for two upon successful installation completion.</p><div className="space-y-6">{[{ t: "Premier Destinations", d: "High-end Las Vegas resort locations." }, { t: "12-Month Validity", d: "Vouchers valid for a full calendar year." }].map((item, i) => (<div key={i} className="flex items-start space-x-4"><div className="w-6 h-6 rounded-full bg-[#FF5900]/10 flex items-center justify-center mt-1"><Check className="w-3.5 h-3.5 text-[#FF5900]" /></div><div><p className="font-bold text-slate-900 uppercase text-xs">{item.t}</p><p className="text-slate-500 text-sm mt-1">{item.d}</p></div></div>))}</div></div><div className="relative group"><div className="aspect-square bg-slate-900 rounded-[48px] overflow-hidden flex flex-col items-center justify-center text-white relative"><div className="absolute inset-0 bg-gradient-to-tr from-[#FF5900]/30 to-transparent opacity-60" /><Ticket className="w-32 h-32 text-white mb-8 animate-bounce" /><p className="text-xs font-black uppercase tracking-[0.4em]">Direct Tech Booking Only</p></div><div className="absolute -bottom-6 -right-6 bg-white border-2 border-[#FF5900]/20 p-8 rounded-3xl shadow-2xl text-center"><p className="text-3xl font-black text-slate-900">$600+</p><p className="text-[10px] font-black text-slate-400 uppercase mt-1 leading-none tracking-widest">Retail Value</p></div></div></div></ScrollReveal></section>
     </>
   );
 
@@ -339,20 +371,6 @@ const App = () => {
     </>
   );
 
-  const ServicesView = () => (
-    <>
-      <PageHeader title="Lead Tech" subtitle="Technical excellence from a Lead Technician." icon={Wrench} />
-      <section className="py-24 px-6 max-w-5xl mx-auto text-slate-900"><div className="rounded-[48px] overflow-hidden mb-12 shadow-2xl border border-slate-200"><img src={IMG_PRO_INSTALL} alt="Install" className="w-full h-auto" /></div><div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"><div className="bg-white p-12 rounded-[48px] border border-slate-200 shadow-sm"><h3 className="text-3xl font-black uppercase mb-6 tracking-tight">Direct Pro Support.</h3><p className="text-slate-600 leading-relaxed mb-8 font-light">Rahj ensures every design utilize full AI deterrent potential with zero blind spots for homeowners nationwide.</p><div className="space-y-4">{["Lead Site Mapping", "Invisible Wiring", "Tech Coordination"].map(s => (<div key={s} className="flex items-center space-x-3"><Home className="w-5 h-5 text-slate-900" /><span className="text-sm font-black text-slate-700 uppercase tracking-widest">{s}</span></div>))}</div></div><div className="aspect-square bg-slate-900 rounded-[48px] flex flex-col items-center justify-center p-12 text-center text-white relative overflow-hidden"><Wrench className="w-16 h-16 text-[#FF5900] mb-6 animate-pulse" /><h4 className="text-2xl font-black uppercase mb-4 tracking-tighter leading-none text-white">Rahj • Lead Tech</h4><p className="text-slate-400 text-sm font-light italic leading-relaxed">"One lead technician's oversight for your home's infrastructure."</p></div></div></section>
-    </>
-  );
-
-  const RecruitmentView = () => (
-    <>
-      <PageHeader title="Join the Team" subtitle="Mentorship and technical career opportunities with Rahj." icon={UserPlus} />
-      <section className="py-24 px-6 max-w-4xl mx-auto text-slate-900"><div className="bg-white border border-slate-200 p-10 md:p-20 rounded-[48px] text-center shadow-xl"><h2 className="text-3xl md:text-5xl font-black uppercase text-slate-900 leading-tight mb-8 tracking-tighter">Technical <br/> Mentorship.</h2><p className="text-slate-500 text-lg leading-relaxed mb-12 italic">"Precision engineering over speed. If you have the drive to become Lead Certified, reach out today."</p><button onClick={() => openModal()} className="px-12 py-6 bg-slate-900 text-white rounded-full font-black uppercase hover:bg-[#FF5900] transition-all shadow-xl">Apply for Mentorship</button></div></section>
-    </>
-  );
-
   const renderView = () => {
     switch (view) {
       case 'packages': return <PackagesView />;
@@ -364,12 +382,54 @@ const App = () => {
     }
   };
 
+  const ServicesView = () => (
+    <>
+      <PageHeader title="Lead Tech" subtitle="Technical excellence from a Lead Technician." icon={Wrench} />
+      <section className="py-24 px-6 max-w-5xl mx-auto text-slate-900">
+        <div className="rounded-[48px] overflow-hidden mb-12 shadow-2xl border border-slate-200">
+          <img src={IMG_PRO_INSTALL} alt="Install" className="w-full h-auto" />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="bg-white p-12 rounded-[48px] border border-slate-200 shadow-sm">
+            <h3 className="text-3xl font-black uppercase mb-6 tracking-tight">Direct Pro Support.</h3>
+            <p className="text-slate-600 leading-relaxed mb-8 font-light">Rahj ensures every design utilize full AI deterrent potential with zero blind spots for homeowners nationwide.</p>
+            <div className="space-y-4">
+              {["Lead Site Mapping", "Invisible Wiring", "Tech Coordination"].map(s => (
+                <div key={s} className="flex items-center space-x-3"><Home className="w-5 h-5 text-slate-900" /><span className="text-sm font-black text-slate-700 uppercase tracking-widest">{s}</span></div>
+              ))}
+            </div>
+          </div>
+          <div className="aspect-square bg-slate-900 rounded-[48px] flex flex-col items-center justify-center p-12 text-center text-white relative overflow-hidden">
+            <Wrench className="w-16 h-16 text-[#FF5900] mb-6 animate-pulse" />
+            <h4 className="text-2xl font-black uppercase mb-4 tracking-tighter leading-none text-white">Rahj • Lead Tech</h4>
+            <p className="text-slate-400 text-sm font-light italic leading-relaxed">"One lead technician's oversight for your home's infrastructure."</p>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+
+  const RecruitmentView = () => (
+    <>
+      <PageHeader title="Join the Team" subtitle="Mentorship and technical career opportunities with Rahj." icon={UserPlus} />
+      <section className="py-24 px-6 max-w-4xl mx-auto text-slate-900">
+        <div className="bg-white border border-slate-200 p-10 md:p-20 rounded-[48px] text-center shadow-xl">
+          <h2 className="text-3xl md:text-5xl font-black uppercase text-slate-900 leading-tight mb-8 tracking-tighter">Technical <br/> Mentorship.</h2>
+          <p className="text-slate-500 text-lg leading-relaxed mb-12 italic">"Precision engineering over speed. If you have the drive to become Lead Certified, reach out today."</p>
+          <button onClick={() => openModal()} className="px-12 py-6 bg-slate-900 text-white rounded-full font-black uppercase hover:bg-[#FF5900] transition-all shadow-xl">Apply for Mentorship</button>
+        </div>
+      </section>
+    </>
+  );
+
   return (
     <div className="bg-[#F5F5F7] text-slate-900 min-h-screen font-sans selection:bg-[#FF5900]/30 overflow-x-hidden antialiased">
       <Header />
       <InquiryModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
       <ProductFocusModal product={selectedProduct} onClose={() => setSelectedProduct(null)} openInquiry={() => openModal()} />
-      <main className="min-h-screen">{renderView()}</main>
+      <main className="min-h-screen">
+        {renderView()}
+      </main>
       <footer className="py-24 px-6 bg-white border-t border-slate-200 text-center">
         <div className="max-w-xl mx-auto">
           <div className="flex justify-center space-x-6 mb-12">
