@@ -49,7 +49,7 @@ const PRIMARY_AREA = "Serving Indiana & Nationwide";
 const IMG_CAMERAS_SUITE = "https://images.travelprox.com/techrahj/camerasuite.png";
 const IMG_DOORBELL_DETAIL = "https://images.travelprox.com/techrahj/doorbellframe.png";
 const IMG_PRO_INSTALL = "https://images.travelprox.com/techrahj/installwoman.png";
-const IMG_HUB_SOLO = "https://images.travelprox.com/techrahj/smarthub.png"; // Updated for Unified Control area
+const IMG_HUB_SOLO = "https://images.travelprox.com/techrahj/smarthub.png";
 
 // --- Product Data ---
 const PRODUCTS = [
@@ -77,7 +77,7 @@ const PRODUCTS = [
   { 
     name: "Smart Hub", 
     desc: "Smart Home Command Center", 
-    img: "https://images.travelprox.com/techrahj/smarthubwhite.png", // Maintains white version in carousel
+    img: "https://images.travelprox.com/techrahj/smarthubwhite.png",
     longDesc: "The brain of your home. A 7-inch touchscreen that connects all your devices into one ecosystem with a dedicated cellular connection for 24/7 reliability even without Wi-Fi.",
     features: ["7-inch Touchscreen", "Cellular Connection", "One-Touch Dispatch", "Two-Way Voice"]
   },
@@ -122,13 +122,6 @@ const PRODUCTS = [
     img: "https://images.travelprox.com/techrahj/watersensor.png",
     longDesc: "Detects leaks near appliances or basements immediately. Alerts your Smart Hub and phone, allowing you to act before a minor leak becomes major damage.",
     features: ["Instant Detection", "Freeze Alerts", "Encrypted Signal", "10-Year Battery"]
-  },
-  { 
-    name: "Secondary Keypad", 
-    desc: "Extra Point of Control", 
-    img: "https://images.travelprox.com/techrahj/keypad.png",
-    longDesc: "An additional sleek keypad for your master bedroom or back door. Arm and disarm your system or trigger panic alarms from anywhere in the home.",
-    features: ["Panic Buttons", "Backlit Keys", "Chime Alerts", "Wall-Mountable"]
   }
 ];
 
@@ -234,7 +227,7 @@ const ProductCarousel = ({ title, subtitle, onSelectProduct }) => {
       </div>
       <div ref={scrollRef} className="flex space-x-6 overflow-x-auto scrollbar-hide px-4 md:px-0 snap-x snap-mandatory" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
         {PRODUCTS.map((product, i) => (
-          <div key={i} onClick={() => onSelectProduct(product)} className="min-w-[280px] md:min-w-[320px] bg-slate-50 rounded-[32px] p-8 snap-start hover:shadow-xl transition-all border border-transparent hover:border-slate-200 group cursor-pointer flex flex-col items-center">
+          <div key={i} onClick={() => onSelectProduct(product)} className="min-w-[280px] md:min-w-[320px] bg-white rounded-[32px] p-8 snap-start hover:shadow-xl transition-all border border-slate-200 group cursor-pointer flex flex-col items-center">
             <div className="w-full aspect-square mb-6 flex items-center justify-center">
               <img src={product.img} alt={product.name} className="w-4/5 h-4/5 object-contain group-hover:scale-110 transition-transform duration-500" />
             </div>
@@ -388,8 +381,8 @@ const App = () => {
               </ul>
             </div>
             <div className="w-full lg:w-1/2 flex justify-center">
-              <div className="relative group p-12 lg:p-20 bg-slate-50 rounded-[64px] border border-slate-100">
-                <img src={IMG_HUB_SOLO} alt="Smart Hub Solo" className="w-full max-w-md h-auto drop-shadow-[0_35px_35px_rgba(0,0,0,0.15)] group-hover:scale-105 transition-transform duration-700" />
+              <div className="relative group w-full aspect-square bg-slate-50 rounded-[64px] border border-slate-100 overflow-hidden">
+                <img src={IMG_HUB_SOLO} alt="Smart Hub Solo" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
               </div>
             </div>
           </div>
@@ -477,16 +470,38 @@ const App = () => {
   const AboutView = () => (
     <>
       <PageHeader title="About Rahj" subtitle="Your Smart Home Installer and Technical Consultant." icon={User} />
-      <section className="py-24 px-6 max-w-4xl mx-auto text-slate-900 text-center">
-        <div className="bg-white border border-slate-200 p-10 md:p-20 rounded-[48px] shadow-xl">
-          <h2 className="text-3xl md:text-5xl font-black uppercase text-slate-900 leading-tight mb-8 tracking-tighter">Practical <br/> Implementation.</h2>
-          <p className="text-slate-500 text-lg leading-relaxed mb-12 font-light">Rahj is a dedicated technical specialist who believes in hands-on quality. Whether he is personally installing your smart home infrastructure or vetting a top-tier local technician for a nationwide project, his focus remains on seamless technical execution and proactive security.</p>
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {["Certified Installer", "Technical Sourcing", "Nationwide Support"].map(badge => (
-              <span key={badge} className="px-6 py-2 bg-slate-100 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-500">{badge}</span>
-            ))}
+      <section className="py-24 px-6 max-w-5xl mx-auto text-slate-900 text-center">
+        <div className="bg-white border border-slate-200 p-10 md:p-20 rounded-[48px] shadow-xl text-left">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-5xl font-black uppercase text-slate-900 leading-tight mb-8 tracking-tighter text-center">Practical <br/> Implementation.</h2>
+            
+            <div className="space-y-8 text-slate-600 leading-relaxed font-light text-lg">
+              <p>
+                Rahj is a dedicated technical specialist who believes in hands-on quality. Whether he is personally installing your smart home infrastructure or vetting a top-tier local technician for a nationwide project, his focus remains on seamless technical execution and proactive security. Over the course of his career, he has personally installed over <strong>3,000 Smart Home Security Systems</strong> across <strong>6 states</strong>.
+              </p>
+
+              <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100">
+                <h3 className="text-slate-900 font-black uppercase text-xs tracking-[0.2em] mb-4">Recognized Vigilance</h3>
+                <p className="text-base">
+                  In 2014, Rahj's commitment to protection was recognized by local news outlets including <strong>Fox 59, WTHR, and WISH TV</strong>. While at the Kings Kids Cultivating Center daycare in Muncie, Indiana, Rahj physically apprehended an armed criminal who had forced their way into the facility with a knife and threatened the lives of everyone inside. This same instinct to protect the most vulnerable drives every security design he creates today.
+                </p>
+              </div>
+
+              <p>
+                Beyond his professional life, Rahj is a man of God, a devoted husband, and a father. He is currently cheering on his son as he navigates his senior year at <strong>Fishers High School</strong>.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-4 mt-12 mb-12">
+              {["3,000+ Installs", "6 States Covered", "Technical Sourcing", "Nationwide Support"].map(badge => (
+                <span key={badge} className="px-6 py-2 bg-slate-100 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-500">{badge}</span>
+              ))}
+            </div>
+            
+            <div className="flex justify-center">
+              <button onClick={() => openModal()} className="px-12 py-6 bg-slate-900 text-white rounded-full font-black uppercase hover:bg-[#FF5900] transition-all shadow-xl">Connect with Rahj</button>
+            </div>
           </div>
-          <button onClick={() => openModal()} className="px-12 py-6 bg-slate-900 text-white rounded-full font-black uppercase hover:bg-[#FF5900] transition-all shadow-xl">Connect with Rahj</button>
         </div>
       </section>
     </>
