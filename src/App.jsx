@@ -49,9 +49,9 @@ const PRIMARY_AREA = "Serving Indiana & Nationwide";
 const IMG_CAMERAS_SUITE = "https://images.travelprox.com/techrahj/camerasuite.png";
 const IMG_DOORBELL_DETAIL = "https://images.travelprox.com/techrahj/doorbellframe.png";
 const IMG_PRO_INSTALL = "https://images.travelprox.com/techrahj/installwoman.png";
-const IMG_HUB_SOLO = "https://images.travelprox.com/techrahj/smarthubwhite.png";
+const IMG_HUB_SOLO = "https://images.travelprox.com/techrahj/smarthub.png"; // Updated for Unified Control area
 
-// --- Product Data (Updated with New White Smart Hub) ---
+// --- Product Data ---
 const PRODUCTS = [
   { 
     name: "Outdoor Camera Pro", 
@@ -77,7 +77,7 @@ const PRODUCTS = [
   { 
     name: "Smart Hub", 
     desc: "Smart Home Command Center", 
-    img: "https://images.travelprox.com/techrahj/smarthubwhite.png",
+    img: "https://images.travelprox.com/techrahj/smarthubwhite.png", // Maintains white version in carousel
     longDesc: "The brain of your home. A 7-inch touchscreen that connects all your devices into one ecosystem with a dedicated cellular connection for 24/7 reliability even without Wi-Fi.",
     features: ["7-inch Touchscreen", "Cellular Connection", "One-Touch Dispatch", "Two-Way Voice"]
   },
@@ -368,7 +368,7 @@ const App = () => {
       {/* Carousel */}
       <ProductCarousel title="The Equipment" subtitle="Professionally installed." onSelectProduct={(p) => setSelectedProduct(p)} />
 
-      {/* Hub Focus Section (Refined without collage) */}
+      {/* Unified Control Section (Refined) */}
       <section className="py-32 px-6 bg-white overflow-hidden">
         <ScrollReveal>
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row-reverse items-center gap-16">
