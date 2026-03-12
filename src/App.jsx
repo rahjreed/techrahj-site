@@ -134,17 +134,17 @@ const InquiryModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center px-4 overflow-y-auto py-10">
+    <div className="fixed inset-0 z-[500] flex items-center justify-center px-4 overflow-y-auto py-10">
       <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" onClick={onClose} />
       <div className="relative w-full max-w-3xl bg-white rounded-[32px] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
-        <button onClick={onClose} className="absolute top-6 right-6 text-slate-400 hover:text-slate-900 transition-colors z-[210] bg-white/80 p-2 rounded-full shadow-sm">
+        <button onClick={onClose} className="absolute top-6 right-6 text-slate-400 hover:text-slate-900 transition-colors z-[510] bg-white/80 p-2 rounded-full shadow-sm">
           <X className="w-6 h-6" />
         </button>
         
         <div className="p-4 md:p-8 pt-12 md:pt-16">
-           <div className="mb-6 text-[11px] leading-relaxed text-slate-500 bg-blue-50/50 p-4 rounded-xl border border-blue-100 italic font-sans">
-               <Info className="w-4 h-4 text-blue-500 mb-2 shrink-0" />
-               <strong>Disclaimer:</strong> This site is owned by a Vivint employee. If you need a service call, tech support, or billing help, contact Vivint Corporate at <a href={`tel:${VIVINT_CORPORATE_SERVICE}`} className="font-bold underline text-blue-600">{VIVINT_CORPORATE_SERVICE}</a>.
+           <div className="mb-6 text-[11px] leading-relaxed text-slate-500 bg-slate-50 p-4 rounded-xl border border-slate-100 italic font-sans">
+               <Info className="w-4 h-4 text-slate-400 mb-2 shrink-0" />
+               <strong>Disclaimer:</strong> TechRahj.com is an Authorized Vivint Dealer owned by a Vivint employee. If you need a service call, tech support, or billing help, contact Vivint Corporate at <a href={`tel:${VIVINT_CORPORATE_SERVICE}`} className="font-bold underline text-slate-600">{VIVINT_CORPORATE_SERVICE}</a>.
             </div>
             <iframe 
               id="JotFormIFrame-019c9390367b78dd8b000792e4ee30e01bf4" 
@@ -165,10 +165,10 @@ const InquiryModal = ({ isOpen, onClose }) => {
 const ProductFocusModal = ({ product, onClose, openInquiry }) => {
   if (!product) return null;
   return (
-    <div className="fixed inset-0 z-[250] flex items-center justify-center p-4 md:p-10">
+    <div className="fixed inset-0 z-[550] flex items-center justify-center p-4 md:p-10">
       <div className="absolute inset-0 bg-black/90 backdrop-blur-2xl animate-in fade-in duration-500" onClick={onClose} />
       <div className="relative w-full max-w-6xl max-h-[90vh] bg-white rounded-[32px] md:rounded-[40px] shadow-2xl overflow-hidden flex flex-col md:flex-row animate-in zoom-in-95 duration-500">
-        <button onClick={onClose} className="absolute top-4 right-4 md:top-8 md:right-8 text-slate-400 hover:text-slate-900 z-[260] bg-slate-100 p-2 rounded-full shadow-sm">
+        <button onClick={onClose} className="absolute top-4 right-4 md:top-8 md:right-8 text-slate-400 hover:text-slate-900 z-[560] bg-slate-100 p-2 rounded-full shadow-sm">
           <X className="w-5 h-5 md:w-6 md:h-6" />
         </button>
 
@@ -297,12 +297,18 @@ export default function App() {
   ];
 
   const Header = () => (
-    <header className="fixed top-0 left-0 w-full z-[100] bg-black text-white px-4 md:px-8 py-4 border-b border-white/5 backdrop-blur-md bg-opacity-95">
+    <header className={`fixed top-0 left-0 w-full z-[300] bg-black text-white px-4 md:px-8 py-4 border-b border-white/5 transition-colors duration-300 ${isMobileMenuOpen ? 'bg-slate-950' : 'backdrop-blur-md bg-opacity-95'}`}>
       <div className="max-w-[1440px] mx-auto flex items-center justify-between">
         <div className="flex items-center space-x-12">
-          <div className="flex items-center space-x-3 cursor-pointer group" onClick={() => setView('home')}>
+          <div className="flex items-center space-x-3 cursor-pointer group" onClick={() => { setView('home'); setIsMobileMenuOpen(false); }}>
             <Home className="w-7 h-7 text-white transition-transform group-hover:scale-110" />
-            <span className="text-xl font-black uppercase text-white tracking-tighter">TechRahj</span>
+            <div className="flex flex-col">
+              <span className="text-xl font-black uppercase text-white tracking-tighter leading-none">TechRahj</span>
+              <span className="text-[9px] font-extralight uppercase text-slate-400 tracking-[0.2em] mt-1.5 flex items-center">
+                <ShieldCheck className="w-2.5 h-2.5 mr-1 text-[#FF5900]/80" />
+                Authorized Dealer
+              </span>
+            </div>
           </div>
           <nav className="hidden lg:flex items-center space-x-8">
             {NavLinks.map((link) => (
@@ -312,19 +318,42 @@ export default function App() {
         </div>
         <div className="flex items-center space-x-6">
           <a href={`tel:${PHONE_NUMBER}`} className="hidden sm:flex items-center space-x-2 bg-[#00D2B4] hover:bg-[#00bda2] text-black px-6 py-2.5 rounded-full font-black text-sm transition-all shadow-lg"><span>{PHONE_NUMBER}</span></a>
-          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden text-white"><Menu className="w-7 h-7" /></button>
-        </div>
-      </div>
-      <div className={`fixed inset-0 top-[72px] bg-black transition-transform duration-500 lg:hidden ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="flex flex-col p-8 space-y-8">
-          {NavLinks.map((link) => (
-            <button key={link.name} onClick={() => { setView(link.view); setIsMobileMenuOpen(false); }} className={`text-3xl font-bold uppercase text-left ${view === link.view ? 'text-[#FF5900]' : 'text-white'}`}>{link.name}</button>
-          ))}
-          <a href={`tel:${PHONE_NUMBER}`} className="flex items-center justify-center space-x-3 w-full py-6 bg-[#00D2B4] text-black rounded-2xl font-black mt-4"><span>{PHONE_NUMBER}</span></a>
-          <button onClick={() => openModal()} className="w-full py-6 bg-[#FF5900] text-white rounded-2xl font-black uppercase tracking-widest">Start Design</button>
+          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden text-white relative z-[400] transition-transform active:scale-90 p-2">
+            {isMobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+          </button>
         </div>
       </div>
     </header>
+  );
+
+  const MobileMenu = () => (
+    <div className={`fixed inset-0 z-[250] bg-slate-950 transition-all duration-500 ease-in-out lg:hidden flex flex-col ${isMobileMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'}`}>
+      <div className="flex flex-col p-10 pt-32 space-y-8 h-full">
+        <div className="flex flex-col space-y-1 mb-8">
+          <div className="flex items-center space-x-2 mb-2">
+              <ShieldCheck className="w-4 h-4 text-[#FF5900]" />
+              <span className="text-xs font-light uppercase text-slate-500 tracking-[0.3em]">Authorized Vivint Dealer</span>
+          </div>
+          <span className="text-3xl font-black uppercase text-white tracking-tighter">Vivint Specialist</span>
+        </div>
+        {NavLinks.map((link) => (
+          <button 
+            key={link.name} 
+            onClick={() => { setView(link.view); setIsMobileMenuOpen(false); }} 
+            className={`text-5xl font-black uppercase text-left tracking-tighter transition-all duration-300 ${view === link.view ? 'text-[#FF5900] translate-x-4' : 'text-white hover:text-[#FF5900]'}`}
+          >
+            {link.name}
+          </button>
+        ))}
+        <div className="pt-12 mt-auto space-y-4">
+          <a href={`tel:${PHONE_NUMBER}`} className="flex items-center justify-center space-x-3 w-full py-6 bg-[#00D2B4] text-black rounded-2xl font-black shadow-xl">
+            <Phone className="w-5 h-5" />
+            <span>{PHONE_NUMBER}</span>
+          </a>
+          <button onClick={() => openModal()} className="w-full py-6 bg-[#FF5900] text-white rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-orange-600/20">Start My Design</button>
+        </div>
+      </div>
+    </div>
   );
 
   const HomeView = () => (
@@ -332,6 +361,11 @@ export default function App() {
       <section className="bg-black text-white pt-24 md:pt-40 overflow-hidden flex flex-col">
         <div className="relative z-20 text-center max-w-5xl mx-auto px-6 mb-12 md:mb-20 flex flex-col items-center">
           <ScrollReveal>
+            <div className="flex items-center space-x-3 mb-8 opacity-90">
+               <div className="h-[1px] w-8 bg-[#FF5900]"></div>
+               <span className="text-[10px] font-light uppercase tracking-[0.4em] text-slate-400 italic">Authorized Vivint Dealer</span>
+               <div className="h-[1px] w-8 bg-[#FF5900]"></div>
+            </div>
             <h1 className="text-[2.75rem] md:text-[5.5rem] leading-[1.05] font-black tracking-tighter mb-8 uppercase text-white">The smartest <br/> security on <br/> <span className="text-white">The block.</span></h1>
             <p className="text-xl md:text-[1.5rem] text-white/90 mb-10 max-w-2xl mx-auto font-medium leading-tight">Vivint gives you the best smart home security system on the market customized for your home, your life, and your peace of mind.</p>
             <button onClick={() => openModal()} className="px-14 py-6 bg-[#FF5900] text-white rounded-full font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-2xl">Start My Design</button>
@@ -368,7 +402,6 @@ export default function App() {
         </ScrollReveal>
       </section>
 
-      {/* Vidyard Section */}
       <section className="py-12 px-6 bg-[#F5F5F7]">
         <div className="max-w-5xl mx-auto">
           <div className="rounded-[48px] overflow-hidden shadow-2xl bg-black aspect-video relative group border border-slate-200">
@@ -451,146 +484,14 @@ export default function App() {
       <section className="py-24 px-6 max-w-7xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {PRODUCTS.map((item, i) => (
-            <div key={i} onClick={() => setSelectedProduct(item)} className="group bg-white border border-slate-200 rounded-[24px] p-8 text-center hover:shadow-xl transition-all cursor-pointer flex flex-col items-center">
-              <div className="w-32 h-32 mb-6 overflow-hidden flex items-center justify-center">
-                <img src={item.img} alt={item.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform" />
-              </div>
-              <h4 className="text-[10px] font-bold uppercase text-slate-900 mb-1 leading-tight tracking-widest">{item.name}</h4>
-            </div>
-          ))}
-        </div>
-      </section>
+            <div key={i} onClick={() => setSelectedProduct(item)} className="group bg-white border border-slate-200 rounded-[24px] p-8 text-center hover:shadow-xl transition-all cursor-pointer flex flex-col items-center"><div className="w-32 h-32 mb-6 overflow-hidden flex items-center justify-center"><img src={item.img} alt={item.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform" /></div><h4 className="text-[10px] font-bold uppercase text-slate-900 mb-1 leading-tight tracking-widest">{item.name}</h4></div>))}</div></section>
     </>
   );
 
   const AboutView = () => (
     <>
-      <PageHeader 
-        title="About Rahj" 
-        subtitle="Meet Your Technician: The protector behind your security design." 
-        icon={ShieldCheck} 
-      />
-      
-      <section className="py-24 px-6 max-w-7xl mx-auto relative">
-        {/* Decorative Background Accent */}
-        <div className="absolute top-0 right-0 w-1/3 h-1/2 bg-orange-50/50 rounded-full blur-[120px] -z-10" />
-        
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-          
-          {/* Left Column: Profile & Achievement Badge */}
-          <div className="lg:col-span-5 flex flex-col items-center lg:items-start space-y-8">
-            <div className="relative w-full max-w-[320px] sm:max-w-none">
-              <div className="aspect-[4/5] rounded-[48px] overflow-hidden bg-white shadow-2xl border border-slate-100 p-2 md:p-3">
-                <div className="w-full h-full rounded-[40px] overflow-hidden">
-                  <img 
-                    src={IMG_RAHJ_PROFILE} 
-                    alt="Rahj - Vivint Technician" 
-                    className="w-full h-full object-cover transition-all duration-700 hover:scale-105"
-                  />
-                </div>
-              </div>
-              {/* The Install Badge - More "Pop" */}
-              <div className="absolute -bottom-6 -right-6 bg-[#FF5900] shadow-2xl rounded-3xl p-6 border-4 border-white flex items-center space-x-4 animate-in zoom-in-50 duration-700">
-                <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center shrink-0">
-                  <Medal className="w-7 h-7 text-white" />
-                </div>
-                <div className="text-white">
-                  <p className="text-[24px] font-black leading-none">3,000+</p>
-                  <p className="text-[10px] font-black uppercase tracking-widest mt-1 opacity-90">Installs Done</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="w-full bg-slate-900 text-white p-10 rounded-[48px] shadow-2xl relative overflow-hidden group">
-               <div className="absolute top-0 right-0 p-8 opacity-10">
-                 <Quote className="w-16 h-16 text-white" />
-               </div>
-               <div className="flex items-center space-x-3 mb-6">
-                 <ShieldCheck className="w-6 h-6 text-[#FF5900]" />
-                 <h4 className="text-lg font-black uppercase tracking-tighter">The Rahj Standard</h4>
-               </div>
-               <p className="text-slate-300 text-base leading-relaxed font-light mb-8">
-                 "Security isn't just about sensors; it's about the peace of mind that comes from knowing the job was done by someone who understands what's at stake."
-               </p>
-               <div className="grid grid-cols-2 gap-4">
-                  <div className="p-5 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm">
-                    <p className="text-[10px] font-black text-[#FF5900] uppercase mb-1">Status</p>
-                    <p className="text-xs font-bold uppercase tracking-tight">Lead Specialist</p>
-                  </div>
-                  <div className="p-5 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm">
-                    <p className="text-[10px] font-black text-[#FF5900] uppercase mb-1">Focus</p>
-                    <p className="text-xs font-bold uppercase tracking-tight">Proactive AI Design</p>
-                  </div>
-               </div>
-            </div>
-          </div>
-
-          {/* Right Column: Bio Content */}
-          <div className="lg:col-span-7 space-y-12">
-            <div>
-              <span className="text-[12px] font-black uppercase text-[#FF5900] mb-4 block tracking-[0.5em] animate-pulse">Meet Your Technician</span>
-              <h2 className="text-4xl md:text-7xl font-black uppercase text-slate-900 leading-[0.9] mb-10 tracking-tighter">Rahj: A Protector <br/>By Nature.</h2>
-              
-              <div className="space-y-8 text-slate-600 text-lg md:text-xl leading-relaxed font-light">
-                <p>
-                  Rahj is more than a smart-home technician—he’s a protector by nature. With years of hands-on experience installing and designing residential security systems, Rahj approaches every home with the mindset that <span className="text-slate-900 font-bold italic">safety isn’t just about equipment, it’s about people.</span>
-                </p>
-                
-                {/* Heroics Spotlight Card */}
-                <div className="bg-white border border-orange-100 p-8 md:p-12 rounded-[48px] shadow-xl shadow-orange-500/5 relative group transition-all hover:shadow-orange-500/10">
-                  <div className="absolute top-0 left-12 transform -translate-y-1/2">
-                     <div className="bg-[#FF5900] text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg">
-                       Documented Bravery
-                     </div>
-                  </div>
-                  <div className="flex items-start space-x-6">
-                    <div className="hidden sm:flex w-14 h-14 bg-orange-50 rounded-2xl items-center justify-center shrink-0">
-                      <Star className="w-7 h-7 text-[#FF5900] fill-[#FF5900]" />
-                    </div>
-                    <div>
-                      <h5 className="font-black uppercase text-xl md:text-2xl tracking-tighter text-slate-900 mb-4">Daycare Heroics</h5>
-                      <p className="text-slate-600 font-medium italic leading-relaxed">
-                        In 2014, Rahj’s instincts and courage were put to the test when he intervened during a break-in at a Muncie daycare, helping stop a dangerous situation before anyone was harmed—a moment that was covered by local news across Indiana.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <p>
-                  That same commitment to protecting families is what he brings to every installation today. Rahj believes security should be designed thoughtfully, installed cleanly, and explained clearly so homeowners feel confident in the protection around them. 
-                </p>
-                <p>
-                  When Rahj works on your home, you’re not just getting technology—you’re getting someone who genuinely cares about keeping families safe.
-                </p>
-              </div>
-            </div>
-
-            {/* Video Section: Daycare Coverage */}
-            <div className="space-y-8">
-              <div className="flex items-center space-x-4">
-                <div className="h-[1px] flex-grow bg-slate-200"></div>
-                <h4 className="text-[11px] font-black uppercase text-slate-400 tracking-[0.4em] whitespace-nowrap">Indiana News Feature</h4>
-                <div className="h-[1px] flex-grow bg-slate-200"></div>
-              </div>
-              <div className="rounded-[48px] overflow-hidden shadow-2xl aspect-video border-8 border-white bg-black relative group transition-transform hover:scale-[1.01] duration-500">
-                <iframe 
-                  src="https://player.mediadelivery.net/embed/587199/414c828d-71ce-4777-879d-780f97f3b880" 
-                  className="w-full h-full border-none" 
-                  allow="autoplay; fullscreen"
-                  title="Rahj Daycare Coverage"
-                />
-              </div>
-              <p className="text-center text-[11px] font-black uppercase text-slate-400 tracking-widest">Muncie Daycare Intervention • Archive Footage</p>
-            </div>
-
-            <div className="pt-12 text-center lg:text-left">
-               <button onClick={() => openModal()} className="px-16 py-7 bg-slate-900 text-white rounded-full font-black uppercase tracking-widest hover:bg-[#FF5900] hover:scale-105 transition-all shadow-2xl shadow-slate-900/20 active:scale-95">
-                 Get Started With Rahj
-               </button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHeader title="About Rahj" subtitle="Meet Your Technician: The protector behind your security design." icon={ShieldCheck} />
+      <section className="py-24 px-6 max-w-7xl mx-auto relative"><div className="absolute top-0 right-0 w-1/3 h-1/2 bg-orange-50/50 rounded-full blur-[120px] -z-10" /><div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start"><div className="lg:col-span-5 flex flex-col items-center lg:items-start space-y-8"><div className="relative w-full max-w-[320px] sm:max-w-none"><div className="aspect-[4/5] rounded-[48px] overflow-hidden bg-white shadow-2xl border border-slate-100 p-2 md:p-3"><div className="w-full h-full rounded-[40px] overflow-hidden"><img src={IMG_RAHJ_PROFILE} alt="Rahj - Vivint Technician" className="w-full h-full object-cover transition-all duration-700 hover:scale-105" /></div></div><div className="absolute -bottom-6 -right-6 bg-[#FF5900] shadow-2xl rounded-3xl p-6 border-4 border-white flex items-center space-x-4 animate-in zoom-in-50 duration-700"><div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center shrink-0"><Medal className="w-7 h-7 text-white" /></div><div className="text-white"><p className="text-[24px] font-black leading-none">3,000+</p><p className="text-[10px] font-black uppercase tracking-widest mt-1 opacity-90">Installs Done</p></div></div></div><div className="w-full bg-slate-900 text-white p-10 rounded-[48px] shadow-2xl relative overflow-hidden group"><div className="absolute top-0 right-0 p-8 opacity-10"><Quote className="w-16 h-16 text-white" /></div><div className="flex items-center space-x-3 mb-6"><ShieldCheck className="w-6 h-6 text-[#FF5900]" /><h4 className="text-lg font-black uppercase tracking-tighter">The Rahj Standard</h4></div><p className="text-slate-300 text-base leading-relaxed font-light mb-8">"Security isn't just about sensors; it's about the peace of mind that comes from knowing the job was done by someone who understands what's at stake."</p><div className="grid grid-cols-2 gap-4"><div className="p-5 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm"><p className="text-[10px] font-black text-[#FF5900] uppercase mb-1">Status</p><p className="text-xs font-bold uppercase tracking-tight">Lead Specialist</p></div><div className="p-5 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm"><p className="text-[10px] font-black text-[#FF5900] uppercase mb-1">Focus</p><p className="text-xs font-bold uppercase tracking-tight">Proactive AI Design</p></div></div></div></div><div className="lg:col-span-7 space-y-12"><div><span className="text-[12px] font-black uppercase text-[#FF5900] mb-4 block tracking-[0.5em] animate-pulse">Meet Your Technician</span><h2 className="text-4xl md:text-7xl font-black uppercase text-slate-900 leading-[0.9] mb-10 tracking-tighter">Rahj: A Protector <br/>By Nature.</h2><div className="space-y-8 text-slate-600 text-lg md:text-xl leading-relaxed font-light"><p>Rahj is more than a smart-home technician—he’s a protector by nature. With years of hands-on experience installing and designing residential security systems, Rahj approaches every home with the mindset that <span className="text-slate-900 font-bold italic">safety isn’t just about equipment, it’s about people.</span></p><div className="bg-white border border-orange-100 p-8 md:p-12 rounded-[48px] shadow-xl shadow-orange-500/5 relative group transition-all hover:shadow-orange-500/10"><div className="absolute top-0 left-12 transform -translate-y-1/2"><div className="bg-[#FF5900] text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg">Documented Bravery</div></div><div className="flex items-start space-x-6"><div className="hidden sm:flex w-14 h-14 bg-orange-50 rounded-2xl items-center justify-center shrink-0"><Star className="w-7 h-7 text-[#FF5900] fill-[#FF5900]" /></div><div><h5 className="font-black uppercase text-xl md:text-2xl tracking-tighter text-slate-900 mb-4">Daycare Heroics</h5><p className="text-slate-600 font-medium italic leading-relaxed">In 2014, Rahj’s instincts and courage were put to the test when he intervened during a break-in at a Muncie daycare, helping stop a dangerous situation before anyone was harmed—a moment that was covered by local news across Indiana.</p></div></div></div><p>That same commitment to protecting families is what he brings to every installation today. Rahj believes security should be designed thoughtfully, installed cleanly, and explained clearly so homeowners feel confident in the protection around them.</p><p>When Rahj works on your home, you’re not just getting technology—you’re getting someone who genuinely cares about keeping families safe.</p></div></div><div className="space-y-8"><div className="flex items-center space-x-4"><div className="h-[1px] flex-grow bg-slate-200"></div><h4 className="text-[11px] font-black uppercase text-slate-400 tracking-[0.4em] whitespace-nowrap">Indiana News Feature</h4><div className="h-[1px] flex-grow bg-slate-200"></div></div><div className="rounded-[48px] overflow-hidden shadow-2xl aspect-video border-8 border-white bg-black relative group transition-transform hover:scale-[1.01] duration-500"><iframe src="https://player.mediadelivery.net/embed/587199/414c828d-71ce-4777-879d-780f97f3b880" className="w-full h-full border-none" allow="autoplay; fullscreen" title="Rahj Daycare Coverage" /></div><p className="text-center text-[11px] font-black uppercase text-slate-400 tracking-widest">Muncie Daycare Intervention • Archive Footage</p></div><div className="pt-12 text-center lg:text-left"><button onClick={() => openModal()} className="px-16 py-7 bg-slate-900 text-white rounded-full font-black uppercase tracking-widest hover:bg-[#FF5900] hover:scale-105 transition-all shadow-2xl shadow-slate-900/20 active:scale-95">Get Started With Rahj</button></div></div></div></section>
     </>
   );
 
@@ -606,6 +507,7 @@ export default function App() {
   return (
     <div className="bg-[#F5F5F7] text-slate-900 min-h-screen font-sans selection:bg-[#FF5900]/30 overflow-x-hidden antialiased">
       <Header />
+      <MobileMenu />
       <InquiryModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
       <ProductFocusModal product={selectedProduct} onClose={() => setSelectedProduct(null)} openInquiry={() => openModal()} />
       <main className="min-h-screen">
@@ -620,10 +522,13 @@ export default function App() {
           <div className="pt-10 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center text-[11px] tracking-[0.3em] text-slate-400 font-black uppercase space-y-4">
             <div className="flex items-center space-x-3">
               <Home className="w-7 h-7 text-slate-900" />
-              <span className="text-slate-900 font-black">TechRahj.com • Vivint Lead Specialist</span>
+              <div className="flex flex-col text-left">
+                <span className="text-slate-900 font-black">TechRahj.com • Authorized Vivint Dealer</span>
+                <span className="text-[9px] text-slate-400 normal-case font-medium">National Smart Home Security Provider</span>
+              </div>
             </div>
             <div className="text-[10px] text-slate-400 max-w-lg mx-auto block mt-4 leading-relaxed font-sans normal-case">
-              <strong>DISCLAIMER:</strong> TechRahj.com is an independent platform owned and operated by a Vivint employee. This site is not owned or maintained by Vivint Corporate. For service, support, or billing, contact Vivint directly at {VIVINT_CORPORATE_SERVICE}.
+              <strong>DISCLAIMER:</strong> TechRahj.com is an Authorized Vivint Dealer owned and operated by a Vivint employee. This site is not owned or maintained by Vivint Corporate. For service, support, or billing, contact Vivint directly at {VIVINT_CORPORATE_SERVICE}.
             </div>
             <span className="font-sans text-[10px] lowercase tracking-normal">© 2026 • NATIONWIDE SMART HOME INFRASTRUCTURE</span>
           </div>
