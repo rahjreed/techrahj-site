@@ -1,57 +1,60 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  Home,
+  Home, 
   Smartphone, 
   Video, 
   Thermometer, 
   Lock, 
   Wrench, 
   MapPin, 
-  UserPlus,
+  UserPlus, 
   ArrowRight, 
   ChevronRight, 
   Zap, 
-  Globe,
-  Loader2,
+  Globe, 
+  Loader2, 
   Check, 
-  Mail,
-  X,
-  MessageSquare,
-  Send,
-  Minimize2,
-  Clock,
-  Phone,
-  Monitor,
-  Eye,
-  Settings,
-  Shield,
-  Activity,
-  Search,
-  Menu,
-  ChevronDown,
-  Plane,
-  Star,
-  Award,
-  Palmtree,
-  Ticket,
-  Cpu,
-  ChevronLeft,
-  Info
+  Mail, 
+  X, 
+  MessageSquare, 
+  Send, 
+  Minimize2, 
+  Clock, 
+  Phone, 
+  Monitor, 
+  Eye, 
+  Settings, 
+  Shield, 
+  Activity, 
+  Search, 
+  Menu, 
+  ChevronDown, 
+  Plane, 
+  Star, 
+  Award, 
+  Palmtree, 
+  Ticket, 
+  Cpu, 
+  ChevronLeft, 
+  Info,
+  ShieldCheck,
+  Heart,
+  Medal,
+  Quote
 } from 'lucide-react';
 
 // --- Configuration ---
 const CONTACT_EMAIL = "rahj@techrahj.com";
-const PHONE_NUMBER = "317-300-4750"; 
+const PHONE_NUMBER = "463-281-3435"; 
 const VIVINT_CORPORATE_SERVICE = "800-216-5232";
 const PRIMARY_AREA = "Serving Indiana & Nationwide";
 
 // --- Marketing Imagery ---
 const IMG_CAMERAS_SUITE = "https://www.vivint.com/sites/default/files/styles/small_hq_840/public/image/2026-02/cameras.png.webp?itok=ORY7_XE7";
-const IMG_HUB_INTEGRATED = "https://www.vivint.com/sites/default/files/styles/small_hq_840/public/image/2026-01/1600%20%281%29.png.webp?itok=Dtu6wBrP";
-const IMG_DOORBELL_DETAIL = "https://www.vivint.com/sites/default/files/styles/small_hq_840/public/image/2026-01/dbc.png.webp?itok=JFC5lbrh";
 const IMG_PRO_INSTALL = "https://www.vivint.com/sites/default/files/styles/desktop_1600_hq/public/image/2024-01/ProInstall-1-Full-1600.jpg.webp?itok=FY9zy1nT";
+const IMG_RAHJ_PROFILE = "https://images.travelprox.com/techrahj/Rahjvivint.png";
 
-// --- Product Data (FULL RECOVERED LIST) ---
+// --- Product Data ---
 const PRODUCTS = [
   { 
     name: "Outdoor Camera Pro", 
@@ -107,7 +110,7 @@ const PRODUCTS = [
     desc: "Energy Efficient Climate", 
     img: "https://www.vivint.com/sites/default/files/styles/square_hq_280x280/public/image/2023-07/Thermostat-Carousel.png.webp?itok=WPdRZrNu",
     longDesc: "Learns your preferences and understands when you're home or away to optimize energy savings. Integrates with safety sensors to shut down HVAC during fire emergencies.",
-    features: ["In-App Temp Control", "Auto Energy Savings", "Safety Shut-off", "Voice Control Ready"]
+    features: ["In-App Temp Control", "Auto Energy Savings", "Safety Maintenance", "Voice Control Ready"]
   },
   { 
     name: "Smoke & CO Detector", 
@@ -125,7 +128,8 @@ const PRODUCTS = [
   }
 ];
 
-// --- Inquiry Modal Component (JOTFORM PAGE EMBED) ---
+// --- Sub-Components ---
+
 const InquiryModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
@@ -158,7 +162,6 @@ const InquiryModal = ({ isOpen, onClose }) => {
   );
 };
 
-// --- Product Focus Modal (MOBILE OPTIMIZED) ---
 const ProductFocusModal = ({ product, onClose, openInquiry }) => {
   if (!product) return null;
   return (
@@ -169,12 +172,10 @@ const ProductFocusModal = ({ product, onClose, openInquiry }) => {
           <X className="w-5 h-5 md:w-6 md:h-6" />
         </button>
 
-        {/* Responsive Image Stage */}
         <div className="w-full md:w-1/2 h-[250px] sm:h-[350px] md:h-auto bg-slate-50 flex items-center justify-center p-8 md:p-12 shrink-0">
           <img src={product.img} alt={product.name} className="w-full h-full object-contain drop-shadow-xl" />
         </div>
 
-        {/* Scrollable Content Side */}
         <div className="w-full md:w-1/2 p-6 md:p-16 lg:p-20 overflow-y-auto flex flex-col justify-center bg-white">
           <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 mb-4 md:mb-6">Component Specs</h2>
           <h3 className="text-3xl md:text-5xl font-black uppercase text-slate-900 mb-4 md:mb-8 leading-none tracking-tighter">{product.name}</h3>
@@ -200,12 +201,11 @@ const ScrollReveal = ({ children }) => {
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => { if (entry.isIntersecting) setIsVisible(true); }, { threshold: 0.1 });
     if (ref.current) observer.observe(ref.current);
-    return () => ref.current && observer.unobserve(ref.current);
+    return () => { if (ref.current) observer.unobserve(ref.current); };
   }, []);
   return <div ref={ref} className={`transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>{children}</div>;
 };
 
-// --- Product Carousel ---
 const ProductCarousel = ({ title, subtitle, onSelectProduct }) => {
   const scrollRef = useRef(null);
   const scroll = (direction) => {
@@ -256,13 +256,15 @@ const PageHeader = ({ title, subtitle, icon: Icon }) => (
   </section>
 );
 
-const App = () => {
+// --- Main App ---
+
+export default function App() {
   const [view, setView] = useState('home'); 
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // JotForm Handler
+  // JotForm Handler Implementation
   useEffect(() => {
     const scriptId = 'jotform-handler-script';
     if (!document.getElementById(scriptId)) {
@@ -271,7 +273,15 @@ const App = () => {
       script.src = 'https://cdn.jotfor.ms/s/umd/a06976b442d/for-form-embed-handler.js';
       script.async = true;
       script.crossOrigin = 'anonymous';
-      script.onload = () => { if (window.jotformEmbedHandler) { try { window.jotformEmbedHandler("iframe[id='JotFormIFrame-019c9390367b78dd8b000792e4ee30e01bf4']", "https://www.jotform.com"); } catch (e) {} } };
+      script.onload = () => { 
+        if (window.jotformEmbedHandler) { 
+          try { 
+            window.jotformEmbedHandler("iframe[id='JotFormIFrame-019c9390367b78dd8b000792e4ee30e01bf4']", "https://www.jotform.com"); 
+          } catch (e) {
+            console.error("Jotform handler init failed", e);
+          } 
+        } 
+      };
       document.body.appendChild(script);
     }
   }, []);
@@ -283,13 +293,11 @@ const App = () => {
   const NavLinks = [
     { name: 'Packages', view: 'packages' },
     { name: 'Hardware', view: 'products' },
-    { name: 'Vegas Trip', view: 'vegas-trip' },
-    { name: 'Lead Tech', view: 'services' },
-    { name: 'Careers', view: 'recruitment' }
+    { name: 'About Rahj', view: 'about' }
   ];
 
   const Header = () => (
-    <header className="fixed top-0 left-0 w-full z-[100] bg-black text-white px-4 md:px-8 py-4 border-b border-white/5">
+    <header className="fixed top-0 left-0 w-full z-[100] bg-black text-white px-4 md:px-8 py-4 border-b border-white/5 backdrop-blur-md bg-opacity-95">
       <div className="max-w-[1440px] mx-auto flex items-center justify-between">
         <div className="flex items-center space-x-12">
           <div className="flex items-center space-x-3 cursor-pointer group" onClick={() => setView('home')}>
@@ -303,7 +311,6 @@ const App = () => {
           </nav>
         </div>
         <div className="flex items-center space-x-6">
-          <div onClick={() => setView('vegas-trip')} className="hidden xl:flex items-center space-x-2 text-[10px] font-black text-white bg-white/5 px-4 py-2 rounded-full border border-white/10 cursor-pointer transition-all hover:bg-[#FF5900]/20"><Plane className="w-3 h-3 text-[#FF5900]" /><span>Vegas Perk</span></div>
           <a href={`tel:${PHONE_NUMBER}`} className="hidden sm:flex items-center space-x-2 bg-[#00D2B4] hover:bg-[#00bda2] text-black px-6 py-2.5 rounded-full font-black text-sm transition-all shadow-lg"><span>{PHONE_NUMBER}</span></a>
           <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden text-white"><Menu className="w-7 h-7" /></button>
         </div>
@@ -314,7 +321,7 @@ const App = () => {
             <button key={link.name} onClick={() => { setView(link.view); setIsMobileMenuOpen(false); }} className={`text-3xl font-bold uppercase text-left ${view === link.view ? 'text-[#FF5900]' : 'text-white'}`}>{link.name}</button>
           ))}
           <a href={`tel:${PHONE_NUMBER}`} className="flex items-center justify-center space-x-3 w-full py-6 bg-[#00D2B4] text-black rounded-2xl font-black mt-4"><span>{PHONE_NUMBER}</span></a>
-          <button onClick={() => openModal()} className="w-full py-6 bg-[#FF5900] text-white rounded-2xl font-black uppercase">Start Design</button>
+          <button onClick={() => openModal()} className="w-full py-6 bg-[#FF5900] text-white rounded-2xl font-black uppercase tracking-widest">Start Design</button>
         </div>
       </div>
     </header>
@@ -327,12 +334,6 @@ const App = () => {
           <ScrollReveal>
             <h1 className="text-[2.75rem] md:text-[5.5rem] leading-[1.05] font-black tracking-tighter mb-8 uppercase text-white">The smartest <br/> security on <br/> <span className="text-white">The block.</span></h1>
             <p className="text-xl md:text-[1.5rem] text-white/90 mb-10 max-w-2xl mx-auto font-medium leading-tight">Vivint gives you the best smart home security system on the market customized for your home, your life, and your peace of mind.</p>
-            <div className="flex flex-col items-center mb-10 animate-in fade-in duration-1000">
-               <button onClick={() => setView('vegas-trip')} className="flex items-center space-x-2 text-white hover:opacity-80 transition-opacity group">
-                 <div className="w-6 h-6 rounded-full border border-white/40 flex items-center justify-center"><Plane className="w-3 h-3 text-white" /></div>
-                 <span className="text-sm font-bold uppercase tracking-widest border-b border-white/20 pb-0.5">Includes a 4-Day, 3-Night Vegas Getaway Voucher</span>
-               </button>
-            </div>
             <button onClick={() => openModal()} className="px-14 py-6 bg-[#FF5900] text-white rounded-full font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-2xl">Start My Design</button>
           </ScrollReveal>
         </div>
@@ -342,32 +343,254 @@ const App = () => {
         </div>
       </section>
 
-      <section className="py-24 px-6 bg-[#F5F5F7]"><ScrollReveal><div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16"><div className="w-full lg:w-1/2 text-center lg:text-left"><span className="text-[10px] font-black uppercase text-slate-400 mb-6 block tracking-[0.4em]">One Ecosystem</span><h2 className="text-[3rem] md:text-6xl font-black uppercase text-slate-900 leading-none mb-8 tracking-tighter leading-[0.95]">The Power of <br/>Proactivity.</h2><p className="text-slate-600 text-lg font-light leading-relaxed mb-10 max-w-xl">AI-driven cameras identify true threats and proactively deter intruders before they strike.</p><div className="grid grid-cols-1 sm:grid-cols-2 gap-6"><div className="p-6 bg-white rounded-3xl border border-slate-200 shadow-sm"><p className="font-bold text-slate-900 uppercase text-xs mb-2 tracking-widest">AI Vision</p><p className="text-slate-500 text-sm">Pass car vs prowler detection.</p></div><div className="p-6 bg-white rounded-3xl border border-slate-200 shadow-sm"><p className="font-bold text-slate-900 uppercase text-xs mb-2 tracking-widest">Smart Deter</p><p className="text-slate-500 text-sm">140dB Active sirens.</p></div></div></div><div className="w-full lg:w-1/2"><img src={IMG_CAMERAS_SUITE} alt="Suite" className="w-full drop-shadow-2xl rounded-[48px]" /></div></div></ScrollReveal></section>
+      <section className="py-24 px-6 bg-[#F5F5F7]">
+        <ScrollReveal>
+          <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
+            <div className="w-full lg:w-1/2 text-center lg:text-left">
+              <span className="text-[10px] font-black uppercase text-slate-400 mb-6 block tracking-[0.4em]">One Ecosystem</span>
+              <h2 className="text-[3rem] md:text-6xl font-black uppercase text-slate-900 leading-none mb-8 tracking-tighter leading-[0.95]">The Power of <br/>Proactivity.</h2>
+              <p className="text-slate-600 text-lg font-light leading-relaxed mb-10 max-w-xl">AI-driven cameras identify true threats and proactively deter intruders before they strike.</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="p-6 bg-white rounded-3xl border border-slate-200 shadow-sm">
+                  <p className="font-bold text-slate-900 uppercase text-xs mb-2 tracking-widest">AI Vision</p>
+                  <p className="text-slate-500 text-sm">Real person vs prowler detection with zero false alarms.</p>
+                </div>
+                <div className="p-6 bg-white rounded-3xl border border-slate-200 shadow-sm">
+                  <p className="font-bold text-slate-900 uppercase text-xs mb-2 tracking-widest">Smart Deter</p>
+                  <p className="text-slate-500 text-sm">140dB active sirens and LED rings ward off threats.</p>
+                </div>
+              </div>
+            </div>
+            <div className="w-full lg:w-1/2">
+              <img src={IMG_CAMERAS_SUITE} alt="Camera Suite" className="w-full drop-shadow-2xl rounded-[48px]" />
+            </div>
+          </div>
+        </ScrollReveal>
+      </section>
+
+      {/* Vidyard Section */}
+      <section className="py-12 px-6 bg-[#F5F5F7]">
+        <div className="max-w-5xl mx-auto">
+          <div className="rounded-[48px] overflow-hidden shadow-2xl bg-black aspect-video relative group border border-slate-200">
+            <iframe 
+              src="https://play.vidyard.com/wocFzyrv2ZcK1ALvvdw5vA" 
+              className="w-full h-full border-none" 
+              allow="autoplay; fullscreen"
+              title="TechRahj Security Overview"
+            />
+          </div>
+        </div>
+      </section>
 
       <ProductCarousel title="The Equipment" subtitle="Professionally installed." onSelectProduct={(p) => setSelectedProduct(p)} />
 
-      <section className="py-24 px-6 bg-white border-t border-slate-200"><div className="max-w-7xl mx-auto flex flex-col lg:flex-row-reverse items-center gap-20"><div className="w-full lg:w-1/2"><span className="text-[10px] font-black uppercase text-slate-400 mb-6 block tracking-[0.4em]">Expert Installation</span><h2 className="text-[3rem] md:text-6xl font-black uppercase text-slate-900 leading-none mb-8 tracking-tighter leading-[0.95]">Lead-Tech <br/> Standards.</h2><p className="text-slate-600 text-lg leading-relaxed mb-10">Working with Rahj ensures every sensor meets high-security Lead-Tech benchmarks for precision and aesthetics.</p><div className="space-y-4 text-slate-800">{["Lead Technician Oversight", "White-Glove Deployment", "System Tutorial"].map((s, i) => (<div key={i} className="flex items-center space-x-3"><Wrench className="w-5 h-5 text-[#FF5900]" /><span className="font-bold uppercase text-xs tracking-widest">{s}</span></div>))}</div><button onClick={() => openModal()} className="mt-12 px-10 py-5 bg-slate-900 text-white rounded-full font-black uppercase text-xs hover:bg-[#FF5900] transition-all">Free Consultation</button></div><div className="w-full lg:w-1/2 relative"><div className="rounded-[48px] overflow-hidden shadow-2xl"><img src={IMG_PRO_INSTALL} alt="Install" className="w-full h-auto" /></div><div className="absolute -bottom-6 -right-6 bg-slate-900 text-white p-8 rounded-3xl shadow-2xl z-20 hidden md:block border border-white/10"><div className="flex items-center justify-center mb-4"><Home className="w-10 h-10 text-white" /></div><p className="text-[10px] font-black uppercase opacity-60 leading-none tracking-widest text-center">Quality Verified</p><h4 className="text-xl font-black uppercase tracking-tighter mt-2 text-center">Certified <br/>Installation</h4></div></div></div></section>
-    </>
-  );
-
-  const VegasTripView = () => (
-    <>
-      <PageHeader title="4-Day Vegas Trip" subtitle="A TechRahj exclusive reward for direct technical booking." icon={Plane} />
-      <section className="py-24 px-6 max-w-7xl mx-auto text-slate-900"><ScrollReveal><div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24"><div className="bg-white rounded-[48px] p-10 md:p-20 border border-slate-200 shadow-sm"><h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-slate-900 mb-8 leading-[0.95]">4 Days. 3 Nights. <br/><span className="text-[#FF5900]">On Us.</span></h2><p className="text-slate-600 text-lg leading-relaxed mb-10 font-light">Book through TechRahj.com and receive a complimentary 4-day, 3-night getaway voucher for two upon successful installation completion.</p><div className="space-y-6">{[{ t: "Premier Destinations", d: "High-end Las Vegas resort locations." }, { t: "12-Month Validity", d: "Vouchers valid for a full calendar year." }].map((item, i) => (<div key={i} className="flex items-start space-x-4"><div className="w-6 h-6 rounded-full bg-[#FF5900]/10 flex items-center justify-center mt-1"><Check className="w-3.5 h-3.5 text-[#FF5900]" /></div><div><p className="font-bold text-slate-900 uppercase text-xs">{item.t}</p><p className="text-slate-500 text-sm mt-1">{item.d}</p></div></div>))}</div></div><div className="relative group"><div className="aspect-square bg-slate-900 rounded-[48px] overflow-hidden flex flex-col items-center justify-center text-white relative"><div className="absolute inset-0 bg-gradient-to-tr from-[#FF5900]/30 to-transparent opacity-60" /><Ticket className="w-32 h-32 text-white mb-8 animate-bounce" /><p className="text-xs font-black uppercase tracking-[0.4em]">Direct Tech Booking Only</p></div><div className="absolute -bottom-6 -right-6 bg-white border-2 border-[#FF5900]/20 p-8 rounded-3xl shadow-2xl text-center"><p className="text-3xl font-black text-slate-900">$600+</p><p className="text-[10px] font-black text-slate-400 uppercase mt-1 leading-none tracking-widest">Retail Value</p></div></div></div></ScrollReveal></section>
+      <section className="py-24 px-6 bg-white border-t border-slate-200">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row-reverse items-center gap-20">
+          <div className="w-full lg:w-1/2">
+            <span className="text-[10px] font-black uppercase text-slate-400 mb-6 block tracking-[0.4em]">Expert Installation</span>
+            <h2 className="text-[3rem] md:text-6xl font-black uppercase text-slate-900 leading-none mb-8 tracking-tighter leading-[0.95]">Lead-Tech <br/> Standards.</h2>
+            <p className="text-slate-600 text-lg leading-relaxed mb-10">Working with Rahj ensures every sensor meets high-security Lead-Tech benchmarks for precision, reliability, and aesthetics.</p>
+            <div className="space-y-4 text-slate-800">
+              {["Lead Technician Oversight", "White-Glove Deployment", "System Tutorial"].map((s, i) => (
+                <div key={i} className="flex items-center space-x-3">
+                  <Wrench className="w-5 h-5 text-[#FF5900]" />
+                  <span className="font-bold uppercase text-xs tracking-widest">{s}</span>
+                </div>
+              ))}
+            </div>
+            <button onClick={() => openModal()} className="mt-12 px-10 py-5 bg-slate-900 text-white rounded-full font-black uppercase text-xs hover:bg-[#FF5900] transition-all tracking-widest">Free Consultation</button>
+          </div>
+          <div className="w-full lg:w-1/2 relative">
+            <div className="rounded-[48px] overflow-hidden shadow-2xl">
+              <img src={IMG_PRO_INSTALL} alt="Pro Installation" className="w-full h-auto" />
+            </div>
+            <div className="absolute -bottom-6 -right-6 bg-slate-900 text-white p-8 rounded-3xl shadow-2xl z-20 hidden md:block border border-white/10">
+              <div className="flex items-center justify-center mb-4"><Home className="w-10 h-10 text-white" /></div>
+              <p className="text-[10px] font-black uppercase opacity-60 leading-none tracking-widest text-center">Quality Verified</p>
+              <h4 className="text-xl font-black uppercase tracking-tighter mt-2 text-center">Certified <br/>Installation</h4>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 
   const PackagesView = () => (
     <>
       <PageHeader title="Smart Packages" subtitle="Industry-leading security tailored to your property." icon={Settings} />
-      <section className="py-24 px-6 max-w-7xl mx-auto"><div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-slate-900">{[{ name: "Essentials", features: ["Smart Hub", "Entry Sensors", "Smart Lock", "Vegas Trip Voucher"], color: "bg-slate-50" }, { name: "Video Pro", features: ["DBC Pro", "Outdoor Pro", "AI Deterrence", "Vegas Trip Voucher"], color: "bg-white border-slate-200 border-2 shadow-xl" }, { name: "Complete Defense", features: ["360 Security", "Thermostat", "Smoke Safety", "Vegas Trip Voucher"], color: "bg-slate-900 text-white" }].map((pkg, i) => (<div key={i} className={`p-10 rounded-[40px] flex flex-col justify-between ${pkg.color}`}><div><h4 className="text-2xl font-black uppercase mb-8 leading-none tracking-tighter">{pkg.name}</h4><div className="space-y-4 mb-10">{pkg.features.map(f => (<div key={f} className={`flex items-center space-x-3 text-sm ${f.includes('Vegas') ? 'opacity-80 italic' : ''}`}>{f.includes('Vegas') ? <Plane className="w-4 h-4 shrink-0" /> : <Check className="w-4 h-4 text-[#FF5900] shrink-0" />}<span>{f}</span></div>))}</div></div><button onClick={() => openModal()} className="w-full py-5 bg-[#FF5900] text-white rounded-2xl font-black uppercase text-xs tracking-widest transition-transform hover:scale-105">Request Design</button></div>))}</div></section>
+      <section className="py-24 px-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-slate-900">
+          {[
+            { name: "Essentials", features: ["Smart Hub", "Entry Sensors", "Smart Lock", "Professional Install"], color: "bg-slate-50" },
+            { name: "Video Pro", features: ["DBC Pro", "Outdoor Pro", "AI Deterrence", "Professional Install"], color: "bg-white border-slate-200 border-2 shadow-xl scale-[1.05] z-10" },
+            { name: "Complete Defense", features: ["360 Security", "Thermostat", "Smoke Safety", "Professional Install"], color: "bg-slate-900 text-white" }
+          ].map((pkg, i) => (
+            <div key={i} className={`p-10 rounded-[40px] flex flex-col justify-between ${pkg.color}`}>
+              <div>
+                <h4 className="text-2xl font-black uppercase mb-8 leading-none tracking-tighter">{pkg.name}</h4>
+                <div className="space-y-4 mb-10">
+                  {pkg.features.map(f => (
+                    <div key={f} className={`flex items-center space-x-3 text-sm`}>
+                      <Check className="w-4 h-4 text-[#FF5900] shrink-0" />
+                      <span>{f}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <button onClick={() => openModal()} className="w-full py-5 bg-[#FF5900] text-white rounded-2xl font-black uppercase text-xs tracking-widest transition-transform hover:scale-105 active:scale-95">Request Design</button>
+            </div>
+          ))}
+        </div>
+      </section>
     </>
   );
 
   const ProductsView = () => (
     <>
       <PageHeader title="Hardware" subtitle="Engineering excellence from Vivint." icon={Cpu} />
-      <section className="py-24 px-6 max-w-7xl mx-auto"><div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">{PRODUCTS.map((item, i) => (<div key={i} onClick={() => setSelectedProduct(item)} className="group bg-white border border-slate-200 rounded-[24px] p-8 text-center hover:shadow-xl transition-all cursor-pointer flex flex-col items-center"><div className="w-32 h-32 mb-6 overflow-hidden flex items-center justify-center"><img src={item.img} alt={item.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform" /></div><h4 className="text-[10px] font-bold uppercase text-slate-900 mb-1 leading-tight tracking-widest">{item.name}</h4></div>))}</div></section>
+      <section className="py-24 px-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {PRODUCTS.map((item, i) => (
+            <div key={i} onClick={() => setSelectedProduct(item)} className="group bg-white border border-slate-200 rounded-[24px] p-8 text-center hover:shadow-xl transition-all cursor-pointer flex flex-col items-center">
+              <div className="w-32 h-32 mb-6 overflow-hidden flex items-center justify-center">
+                <img src={item.img} alt={item.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform" />
+              </div>
+              <h4 className="text-[10px] font-bold uppercase text-slate-900 mb-1 leading-tight tracking-widest">{item.name}</h4>
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
+  );
+
+  const AboutView = () => (
+    <>
+      <PageHeader 
+        title="About Rahj" 
+        subtitle="Meet Your Technician: The protector behind your security design." 
+        icon={ShieldCheck} 
+      />
+      
+      <section className="py-24 px-6 max-w-7xl mx-auto relative">
+        {/* Decorative Background Accent */}
+        <div className="absolute top-0 right-0 w-1/3 h-1/2 bg-orange-50/50 rounded-full blur-[120px] -z-10" />
+        
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+          
+          {/* Left Column: Profile & Achievement Badge */}
+          <div className="lg:col-span-5 flex flex-col items-center lg:items-start space-y-8">
+            <div className="relative w-full max-w-[320px] sm:max-w-none">
+              <div className="aspect-[4/5] rounded-[48px] overflow-hidden bg-white shadow-2xl border border-slate-100 p-2 md:p-3">
+                <div className="w-full h-full rounded-[40px] overflow-hidden">
+                  <img 
+                    src={IMG_RAHJ_PROFILE} 
+                    alt="Rahj - Vivint Technician" 
+                    className="w-full h-full object-cover transition-all duration-700 hover:scale-105"
+                  />
+                </div>
+              </div>
+              {/* The Install Badge - More "Pop" */}
+              <div className="absolute -bottom-6 -right-6 bg-[#FF5900] shadow-2xl rounded-3xl p-6 border-4 border-white flex items-center space-x-4 animate-in zoom-in-50 duration-700">
+                <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center shrink-0">
+                  <Medal className="w-7 h-7 text-white" />
+                </div>
+                <div className="text-white">
+                  <p className="text-[24px] font-black leading-none">3,000+</p>
+                  <p className="text-[10px] font-black uppercase tracking-widest mt-1 opacity-90">Installs Done</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="w-full bg-slate-900 text-white p-10 rounded-[48px] shadow-2xl relative overflow-hidden group">
+               <div className="absolute top-0 right-0 p-8 opacity-10">
+                 <Quote className="w-16 h-16 text-white" />
+               </div>
+               <div className="flex items-center space-x-3 mb-6">
+                 <ShieldCheck className="w-6 h-6 text-[#FF5900]" />
+                 <h4 className="text-lg font-black uppercase tracking-tighter">The Rahj Standard</h4>
+               </div>
+               <p className="text-slate-300 text-base leading-relaxed font-light mb-8">
+                 "Security isn't just about sensors; it's about the peace of mind that comes from knowing the job was done by someone who understands what's at stake."
+               </p>
+               <div className="grid grid-cols-2 gap-4">
+                  <div className="p-5 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm">
+                    <p className="text-[10px] font-black text-[#FF5900] uppercase mb-1">Status</p>
+                    <p className="text-xs font-bold uppercase tracking-tight">Lead Specialist</p>
+                  </div>
+                  <div className="p-5 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm">
+                    <p className="text-[10px] font-black text-[#FF5900] uppercase mb-1">Focus</p>
+                    <p className="text-xs font-bold uppercase tracking-tight">Proactive AI Design</p>
+                  </div>
+               </div>
+            </div>
+          </div>
+
+          {/* Right Column: Bio Content */}
+          <div className="lg:col-span-7 space-y-12">
+            <div>
+              <span className="text-[12px] font-black uppercase text-[#FF5900] mb-4 block tracking-[0.5em] animate-pulse">Meet Your Technician</span>
+              <h2 className="text-4xl md:text-7xl font-black uppercase text-slate-900 leading-[0.9] mb-10 tracking-tighter">Rahj: A Protector <br/>By Nature.</h2>
+              
+              <div className="space-y-8 text-slate-600 text-lg md:text-xl leading-relaxed font-light">
+                <p>
+                  Rahj is more than a smart-home technician—he’s a protector by nature. With years of hands-on experience installing and designing residential security systems, Rahj approaches every home with the mindset that <span className="text-slate-900 font-bold italic">safety isn’t just about equipment, it’s about people.</span>
+                </p>
+                
+                {/* Heroics Spotlight Card */}
+                <div className="bg-white border border-orange-100 p-8 md:p-12 rounded-[48px] shadow-xl shadow-orange-500/5 relative group transition-all hover:shadow-orange-500/10">
+                  <div className="absolute top-0 left-12 transform -translate-y-1/2">
+                     <div className="bg-[#FF5900] text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg">
+                       Documented Bravery
+                     </div>
+                  </div>
+                  <div className="flex items-start space-x-6">
+                    <div className="hidden sm:flex w-14 h-14 bg-orange-50 rounded-2xl items-center justify-center shrink-0">
+                      <Star className="w-7 h-7 text-[#FF5900] fill-[#FF5900]" />
+                    </div>
+                    <div>
+                      <h5 className="font-black uppercase text-xl md:text-2xl tracking-tighter text-slate-900 mb-4">Daycare Heroics</h5>
+                      <p className="text-slate-600 font-medium italic leading-relaxed">
+                        In 2014, Rahj’s instincts and courage were put to the test when he intervened during a break-in at a Muncie daycare, helping stop a dangerous situation before anyone was harmed—a moment that was covered by local news across Indiana.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <p>
+                  That same commitment to protecting families is what he brings to every installation today. Rahj believes security should be designed thoughtfully, installed cleanly, and explained clearly so homeowners feel confident in the protection around them. 
+                </p>
+                <p>
+                  When Rahj works on your home, you’re not just getting technology—you’re getting someone who genuinely cares about keeping families safe.
+                </p>
+              </div>
+            </div>
+
+            {/* Video Section: Daycare Coverage */}
+            <div className="space-y-8">
+              <div className="flex items-center space-x-4">
+                <div className="h-[1px] flex-grow bg-slate-200"></div>
+                <h4 className="text-[11px] font-black uppercase text-slate-400 tracking-[0.4em] whitespace-nowrap">Indiana News Feature</h4>
+                <div className="h-[1px] flex-grow bg-slate-200"></div>
+              </div>
+              <div className="rounded-[48px] overflow-hidden shadow-2xl aspect-video border-8 border-white bg-black relative group transition-transform hover:scale-[1.01] duration-500">
+                <iframe 
+                  src="https://player.mediadelivery.net/embed/587199/414c828d-71ce-4777-879d-780f97f3b880" 
+                  className="w-full h-full border-none" 
+                  allow="autoplay; fullscreen"
+                  title="Rahj Daycare Coverage"
+                />
+              </div>
+              <p className="text-center text-[11px] font-black uppercase text-slate-400 tracking-widest">Muncie Daycare Intervention • Archive Footage</p>
+            </div>
+
+            <div className="pt-12 text-center lg:text-left">
+               <button onClick={() => openModal()} className="px-16 py-7 bg-slate-900 text-white rounded-full font-black uppercase tracking-widest hover:bg-[#FF5900] hover:scale-105 transition-all shadow-2xl shadow-slate-900/20 active:scale-95">
+                 Get Started With Rahj
+               </button>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 
@@ -375,52 +598,10 @@ const App = () => {
     switch (view) {
       case 'packages': return <PackagesView />;
       case 'products': return <ProductsView />;
-      case 'services': return <ServicesView />;
-      case 'recruitment': return <RecruitmentView />;
-      case 'vegas-trip': return <VegasTripView />;
+      case 'about': return <AboutView />;
       default: return <HomeView />;
     }
   };
-
-  const ServicesView = () => (
-    <>
-      <PageHeader title="Lead Tech" subtitle="Technical excellence from a Lead Technician." icon={Wrench} />
-      <section className="py-24 px-6 max-w-5xl mx-auto text-slate-900">
-        <div className="rounded-[48px] overflow-hidden mb-12 shadow-2xl border border-slate-200">
-          <img src={IMG_PRO_INSTALL} alt="Install" className="w-full h-auto" />
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="bg-white p-12 rounded-[48px] border border-slate-200 shadow-sm">
-            <h3 className="text-3xl font-black uppercase mb-6 tracking-tight">Direct Pro Support.</h3>
-            <p className="text-slate-600 leading-relaxed mb-8 font-light">Rahj ensures every design utilize full AI deterrent potential with zero blind spots for homeowners nationwide.</p>
-            <div className="space-y-4">
-              {["Lead Site Mapping", "Invisible Wiring", "Tech Coordination"].map(s => (
-                <div key={s} className="flex items-center space-x-3"><Home className="w-5 h-5 text-slate-900" /><span className="text-sm font-black text-slate-700 uppercase tracking-widest">{s}</span></div>
-              ))}
-            </div>
-          </div>
-          <div className="aspect-square bg-slate-900 rounded-[48px] flex flex-col items-center justify-center p-12 text-center text-white relative overflow-hidden">
-            <Wrench className="w-16 h-16 text-[#FF5900] mb-6 animate-pulse" />
-            <h4 className="text-2xl font-black uppercase mb-4 tracking-tighter leading-none text-white">Rahj • Lead Tech</h4>
-            <p className="text-slate-400 text-sm font-light italic leading-relaxed">"One lead technician's oversight for your home's infrastructure."</p>
-          </div>
-        </div>
-      </section>
-    </>
-  );
-
-  const RecruitmentView = () => (
-    <>
-      <PageHeader title="Join the Team" subtitle="Mentorship and technical career opportunities with Rahj." icon={UserPlus} />
-      <section className="py-24 px-6 max-w-4xl mx-auto text-slate-900">
-        <div className="bg-white border border-slate-200 p-10 md:p-20 rounded-[48px] text-center shadow-xl">
-          <h2 className="text-3xl md:text-5xl font-black uppercase text-slate-900 leading-tight mb-8 tracking-tighter">Technical <br/> Mentorship.</h2>
-          <p className="text-slate-500 text-lg leading-relaxed mb-12 italic">"Precision engineering over speed. If you have the drive to become Lead Certified, reach out today."</p>
-          <button onClick={() => openModal()} className="px-12 py-6 bg-slate-900 text-white rounded-full font-black uppercase hover:bg-[#FF5900] transition-all shadow-xl">Apply for Mentorship</button>
-        </div>
-      </section>
-    </>
-  );
 
   return (
     <div className="bg-[#F5F5F7] text-slate-900 min-h-screen font-sans selection:bg-[#FF5900]/30 overflow-x-hidden antialiased">
@@ -444,12 +625,10 @@ const App = () => {
             <div className="text-[10px] text-slate-400 max-w-lg mx-auto block mt-4 leading-relaxed font-sans normal-case">
               <strong>DISCLAIMER:</strong> TechRahj.com is an independent platform owned and operated by a Vivint employee. This site is not owned or maintained by Vivint Corporate. For service, support, or billing, contact Vivint directly at {VIVINT_CORPORATE_SERVICE}.
             </div>
-            <span className="font-sans text-[10px]">© 2026 • NATIONWIDE SMART HOME INFRASTRUCTURE</span>
+            <span className="font-sans text-[10px] lowercase tracking-normal">© 2026 • NATIONWIDE SMART HOME INFRASTRUCTURE</span>
           </div>
         </div>
       </footer>
     </div>
   );
-};
-
-export default App;
+}
