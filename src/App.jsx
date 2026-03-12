@@ -158,7 +158,7 @@ const InquiryModal = ({ isOpen, onClose }) => {
             <iframe 
               id="JotFormIFrame-019c9390367b78dd8b000792e4ee30e01bf4" 
               title="Avery: Smart Home Advisor"
-              allowtransparency="true"
+              allowTransparency="true"
               allow="geolocation; microphone; camera; fullscreen"
               src="https://agent.jotform.com/019c9390367b78dd8b000792e4ee30e01bf4?embedMode=iframe&background=1&shadow=1"
               frameBorder="0" 
@@ -204,12 +204,10 @@ const ProductFocusModal = ({ product, onClose, openInquiry }) => {
   );
 };
 
-// MODAL FOR NEXTDOOR REVIEWS - UPDATED FOR GLASS BLUR LOOK
 const ReviewFocusModal = ({ reviewUrl, onClose }) => {
   if (!reviewUrl) return null;
   return (
     <div className="fixed inset-0 z-[600] flex items-center justify-center p-4 md:p-10">
-      {/* Heavy Backdrop Blur for the "Glass Window" look */}
       <div 
         className="absolute inset-0 bg-slate-900/40 backdrop-blur-2xl animate-in fade-in duration-500" 
         onClick={onClose} 
@@ -409,7 +407,13 @@ export default function App() {
           </ScrollReveal>
         </div>
         <div className="relative w-full aspect-video sm:h-[400px] md:h-[600px] lg:h-[700px] bg-slate-900 border-t border-white/5">
-             <iframe src="https://player.mediadelivery.net/embed/587199/84b6a08e-0dec-48b9-861a-a9558114e7f7?autoplay=true&loop=true&muted=true&controls=false&responsive=true" className="w-full h-full object-cover border-none" allow="autoplay;loop;" title="Hero" />
+             {/* Swapped: Vidyard video now as Hero background */}
+             <iframe 
+                src="https://play.vidyard.com/wocFzyrv2ZcK1ALvvdw5vA?autoplay=1&loop=1&muted=1&controls=0" 
+                className="w-full h-full object-cover border-none" 
+                allow="autoplay; loop; fullscreen" 
+                title="Security Overview Hero" 
+             />
             <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#F5F5F7] to-transparent z-[2]" />
         </div>
       </section>
@@ -442,11 +446,12 @@ export default function App() {
       <section className="py-12 px-6 bg-[#F5F5F7]">
         <div className="max-w-5xl mx-auto">
           <div className="rounded-[48px] overflow-hidden shadow-2xl bg-black aspect-video relative group border border-slate-200">
+            {/* Swapped: Original hero video footage moved here */}
             <iframe 
-              src="https://play.vidyard.com/wocFzyrv2ZcK1ALvvdw5vA" 
+              src="https://player.mediadelivery.net/embed/587199/84b6a08e-0dec-48b9-861a-a9558114e7f7?autoplay=false&loop=true&muted=false&controls=true" 
               className="w-full h-full border-none" 
               allow="autoplay; fullscreen"
-              title="TechRahj Security Overview"
+              title="TechRahj Featurette"
             />
           </div>
         </div>
@@ -521,7 +526,15 @@ export default function App() {
       <section className="py-24 px-6 max-w-7xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {PRODUCTS.map((item, i) => (
-            <div key={i} onClick={() => setSelectedProduct(item)} className="group bg-white border border-slate-200 rounded-[24px] p-8 text-center hover:shadow-xl transition-all cursor-pointer flex flex-col items-center"><div className="w-32 h-32 mb-6 overflow-hidden flex items-center justify-center"><img src={item.img} alt={item.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform" /></div><h4 className="text-[10px] font-bold uppercase text-slate-900 mb-1 leading-tight tracking-widest">{item.name}</h4></div>))}</div></section>
+            <div key={i} onClick={() => setSelectedProduct(item)} className="group bg-white border border-slate-200 rounded-[24px] p-8 text-center hover:shadow-xl transition-all cursor-pointer flex flex-col items-center">
+              <div className="w-32 h-32 mb-6 overflow-hidden flex items-center justify-center">
+                <img src={item.img} alt={item.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform" />
+              </div>
+              <h4 className="text-[10px] font-bold uppercase text-slate-900 mb-1 leading-tight tracking-widest">{item.name}</h4>
+            </div>
+          ))}
+        </div>
+      </section>
     </>
   );
 
