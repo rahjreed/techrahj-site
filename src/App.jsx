@@ -46,7 +46,7 @@ import {
 
 // --- Configuration ---
 const CONTACT_EMAIL = "rahj@techrahj.com";
-const PHONE_NUMBER = "463-281-3435"; 
+const PHONE_NUMBER = "463-281-3454"; 
 const VIVINT_CORPORATE_SERVICE = "800-216-5232";
 const PRIMARY_AREA = "Serving Indiana & Nationwide";
 
